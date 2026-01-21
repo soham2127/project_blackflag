@@ -51,7 +51,15 @@ except LookupError:
     nltk.download('punkt_tab')
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for Vercel frontend
+
+CORS(
+    app,
+    resources={r"/*": {"origins": "*"}},
+    supports_credentials=True,
+    allow_headers=["Content-Type", "Authorization"],
+    methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+)
+
 
 # Base paths
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
